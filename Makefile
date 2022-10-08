@@ -19,7 +19,3 @@ test:
 	@$(MAKE) --no-print-directory -f gmsl-tests
 	@$(MAKE) --no-print-directory -f gmsl-tests EXPORT_ALL=1
 
-.PHONY: upload
-upload:
-	@scp index.html jgrahamc,gmsl@web.sf.net:/home/project-web/gmsl/
-
