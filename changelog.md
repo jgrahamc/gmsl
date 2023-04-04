@@ -1,3 +1,8 @@
+# 2022-10-09 v1.2.0 released
+
+Moved from SourceForge to GitHub and made a release. Functionally the
+same as v1.1.9.
+
 # 2020-04-03 v1.1.9 released
 
 This version contains a new `gmsl-echo-%` function, fixed
