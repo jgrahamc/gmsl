@@ -6,7 +6,7 @@ TAR := $(PACKAGE).tar.gz
 .PHONY: package
 package: $(TAR)
 
-$(TAR): gmsl __gmsl gmsl-tests README index.html
+$(TAR): gmsl __gmsl gmsl-tests README index.html changelog.md
 	@echo Making $@
 	@rm -rf $(PACKAGE)
 	@mkdir $(PACKAGE)
