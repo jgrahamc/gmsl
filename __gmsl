@@ -347,13 +347,13 @@ ifdef __gmsl_have_eval
 #            3: The text to translate
 # Returns:   Returns the text after translating characters
 # ----------------------------------------------------------------------------
-tr = $(strip $(__gmsl_tr3)$(call assert_no_dollar,$0,$1$2$3)              \
-     $(eval __gmsl_t := $3)                                               \
-     $(foreach c,                                                         \
-         $(join $(addsuffix :,$1),$2),                                    \
-         $(eval __gmsl_t :=                                               \
-             $(subst $(word 1,$(subst :, ,$c)),$(word 2,$(subst :, ,$c)), \
-                 $(__gmsl_t))))$(__gmsl_t))
+__gmsl_tr_i = $(if $(strip $1),                                       \
+                   $(call __gmsl_tr_i,                                \
+		     $(call rest,$1),                                 \
+		     $(call rest,$2),                                 \
+		     $(subst $(call first,$1),$(call first,$2),$3)),  \
+		   $3)
+tr = $(strip $(__gmsl_tr3)$(call __gmsl_tr_i,$1,$2,$3))
 
 # Common character classes for use with the tr function.  Each of
 # these is actually a variable declaration and must be wrapped with
@@ -369,14 +369,14 @@ tr = $(strip $(__gmsl_tr3)$(call assert_no_dollar,$0,$1$2$3)              \
 # Arguments: 1: Text to upper case
 # Returns:   Returns the text in upper case
 # ----------------------------------------------------------------------------
-uc = $(__gmsl_tr1)$(call assert_no_dollar,$0,$1)$(call tr,$([a-z]),$([A-Z]),$1)
+uc = $(__gmsl_tr1)$(call tr,$([a-z]),$([A-Z]),$1)
 
 # ----------------------------------------------------------------------------
 # Function:  lc
 # Arguments: 1: Text to lower case
 # Returns:   Returns the text in lower case
 # ----------------------------------------------------------------------------
-lc = $(__gmsl_tr1)$(call assert_no_dollar,$0,$1)$(call tr,$([A-Z]),$([a-z]),$1)
+lc = $(__gmsl_tr1)$(call tr,$([A-Z]),$([a-z]),$1)
 
 # ----------------------------------------------------------------------------
 # Function:  strlen
