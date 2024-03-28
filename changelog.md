@@ -1,3 +1,8 @@
+# 2024-03-28 v1.2.1 released
+
+Make the tr, uc and lc functions work with strings containing
+$ and # and allowed the use of : in character substitution in tr.
+
 # 2022-10-09 v1.2.0 released
 
 Moved from SourceForge to GitHub and made a release. Functionally the
