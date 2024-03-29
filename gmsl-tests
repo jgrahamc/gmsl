@@ -230,6 +230,8 @@ $(call test_assert,$(call substr,some string,5,6), s)
 $(call test_assert,$(call substr,some string,5,7), st)
 $(call test_assert,$(call substr,some string,5,8), str)
 $(call test_assert,$(call substr,some string,1,100),some string)
+$(call test_assert,$(call substr,some $$trng,6,9),$$trn)
+$(call test_assert,$(call substr,some #trng,5,8), #tr)
 $(call stop_test)
 
 $(call start_test,lc)

@@ -18,4 +18,3 @@ $(TAR): gmsl __gmsl gmsl-tests README index.html changelog.md
 test:
 	@$(MAKE) --no-print-directory -f gmsl-tests
 	@$(MAKE) --no-print-directory -f gmsl-tests EXPORT_ALL=1
-

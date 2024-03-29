@@ -405,8 +405,6 @@ define __gmsl_newline
 
 endef
 
-ifdef __gmsl_have_eval
-
 # ----------------------------------------------------------------------------
 # Function:  substr
 # Arguments: 1: A string
@@ -416,9 +414,8 @@ ifdef __gmsl_have_eval
 # Note:      The string in $1 must not contain a §
 # ----------------------------------------------------------------------------
 
-substr = $(if $2,$(__gmsl_tr3)$(call assert_no_dollar,$0,$1$2$3)$(strip $(eval __temp := $$(subst $$(__gmsl_space),§ ,$$1))$(foreach a,$(__gmsl_characters),$(eval __temp := $$(subst $$a,$$a$$(__gmsl_space),$(__temp))))$(eval __temp := $(wordlist $2,$3,$(__temp))))$(subst §,$(__gmsl_space),$(subst $(__gmsl_space),,$(__temp))))
-
-endif # __gmsl_have_eval
+__gmsl_substr_i = $(if $1,$(call __gmsl_substr_i,$(call rest,$1),$(subst $(call first,$1),$(call first,$1) ,$2)),$2)
+substr = $(if $1,$(__gmsl_tr3)$(subst §, ,$(subst $(__gmsl_space),,$(wordlist $2,$3,$(call __gmsl_substr_i,$(__gmsl_characters),$(subst $(__gmsl_space),§ ,$1))))))
 
 # ###########################################################################
 # SET MANIPULATION FUNCTIONS
