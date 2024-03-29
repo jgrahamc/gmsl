@@ -339,7 +339,6 @@ merge = $(__gmsl_tr2)$(strip $(if $2,                                     \
             $(if $(call seq,1,$(words $2)),                               \
                 $2,$(call first,$2)$1$(call merge,$1,$(call rest,$2)))))
 
-ifdef __gmsl_have_eval
 # ----------------------------------------------------------------------------
 # Function:  tr
 # Arguments: 1: The list of characters to translate from 
@@ -377,6 +376,8 @@ uc = $(__gmsl_tr1)$(call tr,$([a-z]),$([A-Z]),$1)
 # Returns:   Returns the text in lower case
 # ----------------------------------------------------------------------------
 lc = $(__gmsl_tr1)$(call tr,$([A-Z]),$([a-z]),$1)
+
+ifdef __gmsl_have_eval
 
 # ----------------------------------------------------------------------------
 # Function:  strlen
