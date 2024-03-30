@@ -1,3 +1,8 @@
+# 2024-03-30 v1.2.2 released
+
+Make the strlen and substr functions work with strings containing
+$ and # and no longer require $(eval).
+
 # 2024-03-28 v1.2.1 released
 
 Make the tr, uc and lc functions work with strings containing

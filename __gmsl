@@ -42,7 +42,7 @@
 # This is the GNU Make Standard Library version number as a list with
 # three items: major, minor, revision
 
-gmsl_version := 1 2 1
+gmsl_version := 1 2 2
 
 __gmsl_name := GNU Make Standard Library
 
