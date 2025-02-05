@@ -1,3 +1,7 @@
+# 2025-02-05 v1.2.3 released
+
+Added fold function
+
 # 2024-03-30 v1.2.2 released
 
 Make the strlen and substr functions work with strings containing
