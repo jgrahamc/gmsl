@@ -107,6 +107,16 @@ list to iterate over calling the function in 1<br>
 Returns:&nbsp;&nbsp;&nbsp;The list after calling the function on each
 pair of elements<br>
 </span>
+<hr><b>fold</b><br>
+<br>
+<span style="font-family: monospace;">Arguments: 1: Name of function to $(call) for each element of list<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This function takes two arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2: List to
+  iterate over calling the function in 1<br>
+  <be>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3: The "zero" element to be used when the list end is reached<br>
+Returns:&nbsp;&nbsp;&nbsp;The result of calling the function in 1 on each element in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the list with the previous result of calling 1 as the second<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; argument.<br>
+</span>
 <hr><b>leq</b><br>
 <br>
 <span style="font-family: monospace;">Arguments: 1: A list to compare
