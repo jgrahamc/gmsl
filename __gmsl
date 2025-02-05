@@ -5,7 +5,7 @@
 # A library of functions to be used with GNU Make's $(call) that
 # provides functionality not available in standard GNU Make.
 #
-# Copyright (c) 2005-2024 John Graham-Cumming
+# Copyright (c) 2005-2025 John Graham-Cumming
 #
 # This file is part of GMSL
 #
@@ -42,7 +42,7 @@
 # This is the GNU Make Standard Library version number as a list with
 # three items: major, minor, revision
 
-gmsl_version := 1 2 2
+gmsl_version := 1 2 3
 
 __gmsl_name := GNU Make Standard Library
 
@@ -77,10 +77,11 @@ endif
 
 # See if spaces are valid in variable names (this was the case until
 # GNU Make 3.82)
-ifeq ($(MAKE_VERSION),3.82)
-__gmsl_spaced_vars := $(false)
-else
+__gmsl spaced_var := $(true)
+ifeq ($(__gmsl spaced_var),$(true))
 __gmsl_spaced_vars := $(true)
+else
+__gmsl_spaced_vars := $(false)
 endif
 
 # Figure out whether we have $(eval) or not (GNU Make 3.80 and above)
@@ -234,6 +235,21 @@ chop = $(__gmsl_tr1)$(wordlist 2,$(words $1),x $1)
 # Returns:   The list after calling the function on each element
 # ----------------------------------------------------------------------------
 map = $(__gmsl_tr2)$(strip $(foreach a,$2,$(call $1,$a)))
+
+# ----------------------------------------------------------------------------
+# Function:  fold
+# Arguments: 1: Name of function to $(call) for each element of list. This
+#               function takes two arguments
+#            2: List to iterate over calling the function in 1
+#            3: The "zero" element to be used when the list end is reached
+# Returns:   The result of calling the function in 1 on each element in
+#            the list with the previous result of calling 1 as the second
+#            argument.
+# ----------------------------------------------------------------------------
+fold = $(__gmsl_tr3)$(strip $(if $2,$(call $1,                               \
+                                         $(call first,$2),                   \
+                                         $(call fold,$1,$(call rest,$2),$3)),\
+				    $3))
 
 # ----------------------------------------------------------------------------
 # Function:  pairmap
@@ -946,16 +962,16 @@ assert_exists = $(if $0,$(call assert,$(wildcard $1),file '$1' missing))
 
 # ----------------------------------------------------------------------------
 # Function:  assert_no_dollar
-# Arguments: 1: Name of a function being executd
-#            2: Arguments to check
-# Returns:   None
+# Arguments: 1: Name of a function being executed
+#            2: Arguments to check to see if they contain a dollar sign
+# Returns:  None
 # ----------------------------------------------------------------------------
 assert_no_dollar = $(call __gmsl_tr2)$(call assert,$(call not,$(findstring $(__gmsl_dollar),$2)),$1 called with a dollar sign in argument)
 
 # ----------------------------------------------------------------------------
 # Function:  assert_no_space
-# Arguments: 1: Name of a function being executd
-#            2: Arguments to check
+# Arguments: 1: Name of a function being executed
+#            2: Arguments to check to see if they contain spaces
 # Returns:   None
 # ----------------------------------------------------------------------------
 ifeq ($(__gmsl_spaced_vars),$(false))

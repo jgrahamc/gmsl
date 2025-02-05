@@ -146,6 +146,17 @@ $(call test_assert,$(call map,origin,__undefined map MAKE),undefined file defaul
 $(call test_assert,$(call map,origin,),)
 $(call stop_test)
 
+FOLD_LIST = 1 1 2 3 5
+$(call start_test,fold)
+$(call test_assert,$(call fold,plus,$(FOLD_LIST)),12)
+$(call test_assert,$(call fold,plus,$(FOLD_LIST),0),12)
+$(call test_assert,$(call fold,plus,$(FOLD_LIST),1),13)
+$(call test_assert,$(call fold,multiply,$(FOLD_LIST)),0)
+$(call test_assert,$(call fold,multiply,$(FOLD_LIST),0),0)
+$(call test_assert,$(call fold,multiply,$(FOLD_LIST),1),30)
+$(call test_assert,$(call fold,multiply,$(FOLD_LIST),2),60)
+$(call stop_test)
+
 joinem = $1$2
 $(call start_test,pairmap)
 $(call test_assert,$(call pairmap,addsuffix,2 1 3,a b c),a2 b1 c3)
@@ -833,6 +844,7 @@ $(call test_assert,$(call gmsl_compatible,1 1 10),$(true))
 $(call test_assert,$(call gmsl_compatible,1 2 0),$(true))
 $(call test_assert,$(call gmsl_compatible,1 2 1),$(true))
 $(call test_assert,$(call gmsl_compatible,1 2 2),$(true))
-$(call test_assert,$(call gmsl_compatible,1 2 3),)
+$(call test_assert,$(call gmsl_compatible,1 2 3),$(true))
+$(call test_assert,$(call gmsl_compatible,1 2 4),)
 $(call test_assert,$(call gmsl_compatible,2 0 0),)
 $(call stop_test)
