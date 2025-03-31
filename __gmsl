@@ -75,15 +75,6 @@ __gmsl_tr2 :=
 __gmsl_tr3 :=
 endif
 
-# See if spaces are valid in variable names (this was the case until
-# GNU Make 3.82)
-__gmsl spaced_var := $(true)
-ifeq ($(__gmsl spaced_var),$(true))
-__gmsl_spaced_vars := $(true)
-else
-__gmsl_spaced_vars := $(false)
-endif
-
 # Figure out whether we have $(eval) or not (GNU Make 3.80 and above)
 # if we do not then output a warning message, if we do then some
 # functions will be enabled.
@@ -950,7 +941,7 @@ gmsl-print-%: ; @echo $* = $($*)
 #            2: The message to print with the assertion
 # Returns:   None
 # ----------------------------------------------------------------------------
-assert = $(if $2,$(if $1,,$(call __gmsl_error,Assertion failure: $2)))
+assert = $(if $1,,$(call __gmsl_error,Assertion failure: $2))
 
 # ----------------------------------------------------------------------------
 # Function:  assert_exists
@@ -966,7 +957,7 @@ assert_exists = $(if $0,$(call assert,$(wildcard $1),file '$1' missing))
 #            2: Arguments to check to see if they contain a dollar sign
 # Returns:  None
 # ----------------------------------------------------------------------------
-assert_no_dollar = $(call __gmsl_tr2)$(call assert,$(call not,$(findstring $(__gmsl_dollar),$2)),$1 called with a dollar sign in argument)
+assert_no_dollar = $(call assert,$(call not,$(findstring $(__gmsl_dollar),$2)),$1 called with a dollar sign in argument)
 
 # ----------------------------------------------------------------------------
 # Function:  assert_no_space
@@ -974,8 +965,5 @@ assert_no_dollar = $(call __gmsl_tr2)$(call assert,$(call not,$(findstring $(__g
 #            2: Arguments to check to see if they contain spaces
 # Returns:   None
 # ----------------------------------------------------------------------------
-ifeq ($(__gmsl_spaced_vars),$(false))
-assert_no_space = $(call assert,$(call not,$(findstring $(__gmsl_aa_magic),$(subst $(__gmsl_space),$(__gmsl_aa_magic),$2))),$1 called with a space in argument)
-else
-assert_no_space =
-endif
+assert_no_space = $(call assert,$(call not,$(word 2,$2)),$1 called with space in argument)
+
