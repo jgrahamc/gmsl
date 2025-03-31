@@ -4,7 +4,7 @@
 #
 # Test suite for the GMSL
 #
-# Copyright (c) 2005-2024 John Graham-Cumming
+# Copyright (c) 2005-2025 John Graham-Cumming
 #
 # This file is part of GMSL
 #
@@ -850,6 +850,7 @@ $(call test_assert,$(call gmsl_compatible,1 2 0),$(true))
 $(call test_assert,$(call gmsl_compatible,1 2 1),$(true))
 $(call test_assert,$(call gmsl_compatible,1 2 2),$(true))
 $(call test_assert,$(call gmsl_compatible,1 2 3),$(true))
-$(call test_assert,$(call gmsl_compatible,1 2 4),)
+$(call test_assert,$(call gmsl_compatible,1 2 4),$(true))
+$(call test_assert,$(call gmsl_compatible,1 2 5),)
 $(call test_assert,$(call gmsl_compatible,2 0 0),)
 $(call stop_test)
