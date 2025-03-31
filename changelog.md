@@ -1,3 +1,7 @@
+# 2025-03-31 v1.2.4 released
+
+Fixed bug causing GMSL to fail on Make 4.4.1
+
 # 2025-02-05 v1.2.3 released
 
 Added fold function
