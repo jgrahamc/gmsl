@@ -1,3 +1,8 @@
+# 2025-03-31 v1.2.5 released
+
+Merged pull request that speeds up operation of seq function and
+functions that rely on it.
+
 # 2025-03-31 v1.2.4 released
 
 Fixed bug causing GMSL to fail on Make 4.4.1
