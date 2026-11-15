@@ -316,7 +316,7 @@ __gmsl_make_bool = $(if $(strip $1),$(true),$(false))
 #            2: ...this string
 # Returns:   Returns $(true) if the two strings are identical
 # ----------------------------------------------------------------------------
-seq = $(__gmsl_tr2)$(if $(subst x$1,,x$2)$(subst x$2,,x$1),$(false),$(true))
+seq = $(__gmsl_tr2)$(findstring $(subst x$1,$(true),x$2),$(true))
 
 # ----------------------------------------------------------------------------
 # Function:  sne
